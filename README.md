@@ -165,3 +165,7 @@ To ensure VS Code only uploads the Pico code (and not your Docker files), you sh
 The Pico will turn on, connect to Wi-Fi (lighting up the LED on pin 15), and immediately start sending data to the Mosquitto broker running on your PC!
 
 ---
+
+## Acknowledgments
+
+This project was built based on a lecture and materials provided by [**Kokchun Giang**](https://github.com/kokchun) as part of the [**Edge computing**](https://github.com/AIgineerAB/edge_computing_course) course.
