@@ -7,4 +7,5 @@ COPY pyproject.toml /app/
 RUN pip install --no-cache-dir uv
 RUN uv sync --no-dev
 
-CMD [ "uv", "run", "consumer.py" ]
+ENV PYTHONUNBUFFERED=1
+CMD [ "uv", "run", "python", "-u", "consumer.py" ]
