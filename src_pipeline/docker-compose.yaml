@@ -4,3 +4,11 @@ services:
     image: eclipse-mosquitto
     ports:
       - "1883:1883"
+
+  consumer:
+    container_name: consumer
+    build:
+      context: .
+      dockerfile: dockerfiles/consumer.dockerfile
+    depends_on:
+      - mosquitto
