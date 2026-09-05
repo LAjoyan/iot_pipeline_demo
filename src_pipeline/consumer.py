@@ -11,7 +11,7 @@ def on_message(client, userdata, message):
 
 if __name__ == "__main__":
     client = mqtt.Client()
-    client.connect("mosquitto", 1883)
+    client.connect("localhost", 1883)
     client.subscribe("home/pico/dht11")
     client.on_message = on_message
     client.loop_forever()
