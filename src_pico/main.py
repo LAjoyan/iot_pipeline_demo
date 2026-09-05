@@ -7,6 +7,10 @@ import json
 
 time.sleep(0.1)
 
+# change representation -> MOSQUITTO needs this
+TOPIC = b"home/pico/dht11"
+MQTT_BROKER = "192.168.0.103"
+
 led = Pin(15, Pin.OUT)
 dht_sensor = DHT11(Pin(16))
 
@@ -15,7 +19,7 @@ if connect_wifi():
 
 
 def connect_mqtt():
-    client = MQTTClient(client_id="pico", server="<IP_ADDRESS>", port=1883)
+    client = MQTTClient(client_id="pico", server="<MQTT_BROKER>", port=1883)
     client.connect()
     print("Connected to MQTT")
     return client
