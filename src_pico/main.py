@@ -3,6 +3,7 @@ from wifi import connect_wifi
 from machine import Pin
 from dht import DHT11
 from umqtt.simple import MQTTClient
+import json
 
 time.sleep(0.1)
 
@@ -20,6 +21,8 @@ def connect_mqtt():
     return client
 
 
+client = connect_mqtt()
+
 while True:
     dht_sensor.measure()
     temp = dht_sensor.temperature()
@@ -27,5 +30,9 @@ while True:
 
     data = {"temperature": temp, "humidity": humidity}
     print(data)
+
+    # dict -> str '{"temperature": 25, "humidity": 65}'
+    payload = json.dumps(data)
+    client.publish(TOPIC, payload)
 
     time.sleep(1)
