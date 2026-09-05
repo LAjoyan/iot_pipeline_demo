@@ -19,3 +19,5 @@ while True:
 
     data = {"temperature": temp, "humidity": humidity}
     print(data)
+
+    time.sleep(1)
