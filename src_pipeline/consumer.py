@@ -1,18 +1,39 @@
 import paho.mqtt.client as mqtt
 import json
+from utils.connect_postgres import query_db
 
 
 def on_message(client, userdata, message):
     payload = message.payload.decode()
-    data = json.loads(payload)
 
-    print(payload)
+    print("connec to mqtt", payload, flush=True)
 
-    print(data)
+    data=json.loads(payload)
 
+    temperature = float(data["temperature"])
+    humidity = float(data["humidity"])
+
+    query_db(
+        """
+        INSERT INTO sensor_readings
+            (time, temperature, humidity)
+        VALUES (NOW(), %s, %s)
+""",
+        (temperature, humidity),
+    )
+
+    print("save to database", temperature, humidity, flush=True)
 
 if __name__ == "__main__":
-    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+    query_db("""
+        CREATE TABLE IF NOT EXISTS sensor_readings (
+            time TIMESTAMPTZ NOT NULL,
+            temperature DOUBLE PRECISION,
+            humidity DOUBLE PRECISION
+        )
+    """)
+
+    client = mqtt.Client()
     client.connect("mosquitto", 1883)
     client.subscribe("home/pico/dht11")
     client.on_message = on_message
