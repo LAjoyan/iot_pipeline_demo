@@ -3,6 +3,7 @@ FROM python:3.13-slim
 WORKDIR /app
 COPY consumer.py /app/
 COPY pyproject.toml /app/
+COPY utils /app/utils
 
 RUN pip install --no-cache-dir uv
 RUN uv sync --no-dev
