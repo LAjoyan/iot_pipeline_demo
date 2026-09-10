@@ -9,7 +9,7 @@ time.sleep(0.1)
 
 # change representation -> MOSQUITTO needs this
 TOPIC = b"home/pico/dht11"
-MQTT_BROKER = "192.168.0.103"
+MQTT_BROKER = "10.181.178.99"
 
 led = Pin(15, Pin.OUT)
 dht_sensor = DHT11(Pin(16))
