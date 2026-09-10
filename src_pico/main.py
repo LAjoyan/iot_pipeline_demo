@@ -19,7 +19,7 @@ if connect_wifi():
 
 
 def connect_mqtt():
-    client = MQTTClient(client_id="pico", server="<MQTT_BROKER>", port=1883)
+    client = MQTTClient(client_id="pico", server=MQTT_BROKER, port=1883)
     client.connect()
     print("Connected to MQTT")
     return client
